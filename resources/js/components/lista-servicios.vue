@@ -83,7 +83,6 @@
                 {
                     label: 'Código',
                     field: 'codigo_se',
-                    html: true,
                     filterOptions: {
                         enabled: true, // enable filter for this column
                         placeholder: 'Filtro de código', // placeholder for filter input
@@ -101,7 +100,12 @@
                     label: 'Calificaciones',
                     field: 'calificaciones_count',
                     type: 'number',
+                },
+                {
+                    label: 'Imagen',
+                    field: 'ruta_se',
                 }
+
             ],
             rows: [],
             descripcion:'',
