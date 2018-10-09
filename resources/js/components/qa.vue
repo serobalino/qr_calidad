@@ -32,10 +32,8 @@
         <button type="button" class="btn btn-primary" v-on:click="enviar">Enviar</button>
     </div>
     <div v-else>
-        <div class="alert alert-info" role="alert">
-            <p>Ya calificaste el servicio</p>
-            <hr>
-            <p class="mb-0">Gracias por ayudarnos a mejorar nuetro servicio</p>
+        <div class="alert alert-success" role="alert">
+            <p class="mb-0">Gracias por ayudarnos a mejorar nuetros servicios</p>
         </div>
     </div>
 </template>
@@ -60,8 +58,7 @@
                             'comentario':this.comentario,
                         })
                         .then(response=>{
-                            console.log(response.data);
-                            if(reponse.data.val){
+                            if(response.data.val){
                                 this.ya=true;
                             }else{
                                 toast({

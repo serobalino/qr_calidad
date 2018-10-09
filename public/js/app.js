@@ -73541,8 +73541,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "qa",
@@ -73563,8 +73561,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'reaacion': this.reaccion,
                     'comentario': this.comentario
                 }).then(function (response) {
-                    console.log(response.data);
-                    if (reponse.data.val) {
+                    if (response.data.val) {
                         _this.ya = true;
                     } else {
                         toast({
@@ -73840,14 +73837,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "alert alert-info", attrs: { role: "alert" } },
+      { staticClass: "alert alert-success", attrs: { role: "alert" } },
       [
-        _c("p", [_vm._v("Ya calificaste el servicio")]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
         _c("p", { staticClass: "mb-0" }, [
-          _vm._v("Gracias por ayudarnos a mejorar nuetro servicio")
+          _vm._v("Gracias por ayudarnos a mejorar nuetros servicios")
         ])
       ]
     )
