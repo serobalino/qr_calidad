@@ -29,6 +29,7 @@
         <div class="form-group">
             <textarea class="form-control"  rows="5" placeholder="Que opinas de este servicio" v-model="comentario"></textarea>
         </div>
+        <vue-dropzone  id="fotos" :options="dropzoneOptions" v-on:vdropzone-error="errores" v-on:vdropzone-success="cargarArchivos" v-on:sending="cargarArchivos" ref="fotos" class="btn btn-success fa fa-picture-o"/>
         <button type="button" class="btn btn-primary" v-on:click="enviar">Enviar</button>
     </div>
     <div v-else>
@@ -39,17 +40,49 @@
 </template>
 
 <script>
+    import vue2Dropzone from 'vue2-dropzone';
     export default {
         name: "qa",
         data:()=>({
             comentario:'',
             reaccion:null,
             ya:false,
-        }),
-        watch:{
 
+            subidas:[],
+            dropzoneOptions: {
+                url:'/consulta/upload',
+                maxFiles:1,
+                maxFilesize: 5,
+                headers: { "X-CSRF-TOKEN": window.axios.defaults.headers.common['X-CSRF-TOKEN'] },
+                uploadMultiple:true,
+                dictDefaultMessage: '<i class="la la-photo"></i>',
+                previewTemplate:'<i><i/>',
+                acceptedFiles:'image/*',
+                dictFallbackMessage:"Su navegador no soporta este componente.",
+                dictFileTooBig:"El archivo es muy grande.",
+                dictInvalidFileType:"Solo se admiten imágenes.",
+                dictResponseError:"Error al enviar el archivo.",
+                dictMaxFilesExceeded:"A superado el límite de imágenes.",
+            },
+        }),
+        components: {
+            vueDropzone: vue2Dropzone,
         },
         methods:{
+            errores:function(file,meesage,xhr){
+                swal({
+                    text:meesage,
+                    type:'error'
+                });
+            },
+            cargarArchivos:function(){
+                axios({
+                    method: 'OPTIONS',
+                    url: '/consulta/upload',
+                }).then((response) => {
+                    this.subidas=response.data;
+                });
+            },
             enviar:function(){
                 if(this.reaccion>0){
                     axios.post(location.origin+location.pathname,
