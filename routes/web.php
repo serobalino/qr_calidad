@@ -22,11 +22,17 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/home','ServiciosController@listar');
+Route::options('/home','ServiciosController@listar');
+Route::post('/home','ServiciosController@crear');
+
+Route::get('/a','CalificarServiciosController@prueba');
 
 Route::prefix('📊')->group(function () {
     Route::prefix('servicios')->group(function () {
         Route::get('/','CalificarServiciosController@formualrio')->name('qa.formulario');
+        Route::post('/','CalificarServiciosController@buscar');
+
         Route::get('/{token}','CalificarServiciosController@busqueda')->name('qa.busqueda');
+        Route::post('/{token}','CalificarServiciosController@guardar');
     });
 });

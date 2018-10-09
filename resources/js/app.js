@@ -17,6 +17,10 @@ window.Vue = require('vue');
 
 Vue.component('lista-servicios', require('./components/lista-servicios'));
 
+Vue.component('consulta-servicios', require('./components/consulta-servicio'));
+Vue.component('calificacion', require('./components/qa'));
+
+
 const app = new Vue({
     el: '#app'
 });

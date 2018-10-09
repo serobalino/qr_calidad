@@ -58,7 +58,7 @@ class ServiciosController extends Controller
             $servicio->codigo_se        =   $datos->codigo;
             $servicio->descripcion_se   =   $datos->descripcion;
             $servicio->save();
-            return (['val'=>false,'mensaje'=>"Se ha guardado $datos->titulo"]);
+            return (['val'=>true,'mensaje'=>"Se ha guardado $datos->titulo"]);
         }
     }
 

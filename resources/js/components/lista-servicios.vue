@@ -81,30 +81,27 @@
         data:()=>({
             columns: [
                 {
-                    label: 'Name',
-                    field: 'name',
+                    label: 'Código',
+                    field: 'codigo_se',
+                    html: true,
                     filterOptions: {
                         enabled: true, // enable filter for this column
-                        placeholder: 'Filter This Thing', // placeholder for filter input
+                        placeholder: 'Filtro de código', // placeholder for filter input
                     }
                 },
                 {
-                    label: 'Age',
-                    field: 'age',
+                    label: 'Servicio',
+                    field: 'titulo_se',
+                    filterOptions: {
+                        enabled: true, // enable filter for this column
+                        placeholder: 'Filtro de servicio', // placeholder for filter input
+                    }
+                },
+                {
+                    label: 'Calificaciones',
+                    field: 'calificaciones_count',
                     type: 'number',
-                },
-                {
-                    label: 'Created On',
-                    field: 'createdAt',
-                    type: 'date',
-                    dateInputFormat: 'YYYY-MM-DD',
-                    dateOutputFormat: 'MMM Do YY',
-                },
-                {
-                    label: 'Percent',
-                    field: 'score',
-                    type: 'percentage',
-                },
+                }
             ],
             rows: [],
             descripcion:'',
@@ -121,9 +118,22 @@
 
             codeQr:[],
         }),
+        watch:{
+            cat1:function(val){
+                if(val>0)
+                    this.cargarC2()
+            },
+            cat2:function(val){
+                if(val>0)
+                    this.cargarC3()
+            }
+        },
         methods:{
+            parse:function(objeto){
+                return "<a href='"+objeto.ruta_se+"'/>"+objeto.codigo_se+"</a>";
+            },
             clickear:function(row, index){
-                console.log(row.name); //the object for the row that was clicked on
+                console.log(row); //the object for the row that was clicked on
                 console.log(index); // index of the row that was clicked on
             },
             nuevo:function(){
@@ -139,15 +149,72 @@
                     this.code=response.data.codigo;
                 });
             },
+            cargarLista:function(){
+                axios.options(location.origin+location.pathname)
+                    .then((response) => {
+                    this.rows=response.data;
+                });
+            },
+            cargarC1:function(){
+                axios.get(location.origin+'/api/lista/c1').then((response) => {
+                    this.listaCat1=response.data;
+                });
+            },
+            cargarC2:function(){
+                axios.get(location.origin+'/api/lista/c2/'+this.cat1).then((response) => {
+                    this.listaCat2=response.data;
+                });
+            },
+            cargarC3:function(){
+                axios.get(location.origin+'/api/lista/c3/'+this.cat2).then((response) => {
+                    this.listaCat3=response.data;
+                });
+            },
             enviar:function(){
                 this.$validator.validateAll().then((result) => {
                     if (result) {
-
+                        axios.post(location.origin+location.pathname,
+                            {
+                                'codigo'    :this.code,
+                                'titulo'  :this.titulo,
+                                'descripcion'   :this.descripcion,
+                                'categoria' :this.cat3,
+                            })
+                            .then(response=>{
+                                if(response.data.val){
+                                    this.title='';
+                                    this.descripcion='';
+                                    this.cat3=null;
+                                    this.cat2=null;
+                                    this.cat1=null;
+                                    this.cargarLista();
+                                    $('.bd-example-modal-lg').modal('hide');
+                                    toast({
+                                        type: 'success',
+                                        text: response.data.mensaje
+                                    });
+                                }else{
+                                    swal({
+                                        text:response.data.mensaje,
+                                        type:'error'
+                                    });
+                                }
+                            })
+                            .catch((error) => {
+                                toastr.error("Vuelva a intentar", "Error");
+                            });
                     } else {
-
+                        toast({
+                            type: 'error',
+                            title: 'Complete el formulario'
+                        })
                     }
                 });
             }
+        },
+        mounted(){
+            this.cargarC1();
+            this.cargarLista();
         }
 
     }
