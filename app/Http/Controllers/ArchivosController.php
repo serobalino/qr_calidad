@@ -44,7 +44,7 @@ class ArchivosController extends Controller
         $file = Storage::disk('temporal')->url("$id.jpg");
         Storage::disk('servicios')->makeDirectory($datos->id_se);
 
-            $full_path_source = str_replace("/app/","/sesiones/",Storage::getDriver()->getAdapter()->applyPathPrefix($file));
+            $full_path_source = Storage::disk('temporal')->getDriver()->getAdapter()->applyPathPrefix(basename($file));
             $full_path_dest = Storage::disk('servicios')->getDriver()->getAdapter()->applyPathPrefix($datos->id_se . '/' . basename($file));
             File::move($full_path_source, $full_path_dest);
 
