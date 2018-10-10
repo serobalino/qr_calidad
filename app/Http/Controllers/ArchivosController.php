@@ -49,6 +49,5 @@ class ArchivosController extends Controller
             File::move($full_path_source, $full_path_dest);
 
         Storage::disk('temporal')->delete("$id.jpg");
-        return true;
     }
 }
