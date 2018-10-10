@@ -1,6 +1,6 @@
 <template>
     <div v-if="ya===false">
-        <div class="options">
+        <div class="options col-md-2 col-xs-12">
           <span class="reactions">
             <div class="icon-container">
               <span data-popup="Me gusta" class="gusta reaction" v-on:click="reaccion=1"></span>
@@ -29,8 +29,19 @@
         <div class="form-group">
             <textarea class="form-control"  rows="5" placeholder="Que opinas de este servicio" v-model="comentario"></textarea>
         </div>
-        <vue-dropzone  id="fotos" :options="dropzoneOptions" v-on:vdropzone-error="errores" v-on:vdropzone-success="cargarArchivos" v-on:sending="cargarArchivos" ref="fotos" class="btn btn-success fa fa-picture-o"/>
-        <button type="button" class="btn btn-primary" v-on:click="enviar">Enviar</button>
+        <div class="d-flex">
+            <div class="p-2">
+                <button type="button" class="btn btn-sm btn-primary" v-on:click="enviar">Enviar</button>
+
+            </div>
+            <div class="p-2">
+                <vue-dropzone  id="fotos" :options="dropzoneOptions" v-on:vdropzone-error="errores" v-on:vdropzone-success="cargarArchivos" v-on:sending="cargarArchivos" ref="fotos" class="btn btn-success fa fa-picture-o"/>
+            </div>
+            <div class="p-2">
+                <i class="fa fa-spinner fa-pulse fa-fw" v-if="cargando"></i>
+                <img :src="this.subidas" style="max-height: 50px;margin-bottom: 15px;display:inline" class="img-fluid"/>
+            </div>
+        </div>
     </div>
     <div v-else>
         <div class="alert alert-success" role="alert">
@@ -44,13 +55,14 @@
     export default {
         name: "qa",
         data:()=>({
+            cargando:false,
             comentario:'',
             reaccion:null,
             ya:false,
 
-            subidas:[],
+            subidas:null,
             dropzoneOptions: {
-                url:'/consulta/upload',
+                url:location.origin+location.pathname,
                 maxFiles:1,
                 maxFilesize: 5,
                 headers: { "X-CSRF-TOKEN": window.axios.defaults.headers.common['X-CSRF-TOKEN'] },
@@ -76,16 +88,20 @@
                 });
             },
             cargarArchivos:function(){
+                this.cargando=true;
                 axios({
                     method: 'OPTIONS',
-                    url: '/consulta/upload',
+                    url: location.origin+location.pathname,
                 }).then((response) => {
-                    this.subidas=response.data;
+                    let d = new Date();
+                    this.cargando=false;
+                    if(response.data)
+                        this.subidas=response.data+'?q='+d.getMilliseconds();
                 });
             },
             enviar:function(){
                 if(this.reaccion>0){
-                    axios.post(location.origin+location.pathname,
+                    axios.put(location.origin+location.pathname,
                         {
                             'reaacion'  :this.reaccion,
                             'comentario':this.comentario,
@@ -96,7 +112,7 @@
                             }else{
                                 toast({
                                     type: 'error',
-                                    text: 'Ha ocurrido un erro vuelva a intentar'
+                                    text: response.data.mensaje
                                 });
                             }
                         });
@@ -182,6 +198,7 @@
         },
         mounted(){
             this.montarReacciones();
+            this.cargarArchivos();
         }
     }
 </script>
@@ -191,7 +208,7 @@
 
         .options
             background: white
-            width: 150px
+            width: 100%
             box-shadow: 0 0 0 1px rgba(0, 0, 0, .08), 0 2px 2px rgba(0, 0, 0, .15)
             border-radius: 20px
             padding: 10px 13px

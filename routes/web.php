@@ -33,6 +33,10 @@ Route::prefix('📊')->group(function () {
         Route::post('/','CalificarServiciosController@buscar');
 
         Route::get('/{token}','CalificarServiciosController@busqueda')->name('qa.busqueda');
-        Route::post('/{token}','CalificarServiciosController@guardar');
+        Route::put('/{token}','CalificarServiciosController@guardar');
+        Route::post('/{token}','ArchivosController@subir');
+        Route::options('/{token}','ArchivosController@listarMisImagenes');
     });
 });
+
+Route::get('image','ArchivosController@mostrar')->name('subida');

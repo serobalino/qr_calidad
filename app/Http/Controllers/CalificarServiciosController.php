@@ -59,7 +59,8 @@ class CalificarServiciosController extends Controller
                 $qa->id_re          =   $datos->reaacion;
                 $qa->comentario_ca  =   $datos->comentario;
                 $this->comprobar($qa);
-                $qa->save();
+                //$qa->save();
+                return app( 'App\Http\Controllers\ArchivosController')->guardarEnServicio($qa);
                 return (['val'=>true,'mensaje'=>'Se ha guardado su calificación']);
             }else{
                 return (['val'=>false,'mensaje'=>'Ya tiene registrada una calificación a este servicio']);
