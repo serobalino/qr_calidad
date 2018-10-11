@@ -18,9 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('qr/{token}','QrController@crear')->name('generar.qr');
+Route::get('images/{servicio}/{token}','ArchivosController@imagenGuardada')->name('generar.image');
 
 Route::get('servicio/codigo','ServiciosController@codigo');
 
+Route::get('qa','CalificarServiciosController@listar');
 
 Route::prefix('lista')->group(function () {
     Route::get('c1','ListasController@listaCat1');

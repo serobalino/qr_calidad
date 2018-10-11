@@ -70,4 +70,8 @@ class CalificarServiciosController extends Controller
         }
 
     }
+
+    public function listar(){
+        return Calificacion::all();
+    }
 }

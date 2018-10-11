@@ -50,4 +50,11 @@ class ArchivosController extends Controller
             Storage::disk('temporal')->delete("$id.jpg");
         }
     }
+
+    public function imagenGuardada($servicio,$token){
+        if(Storage::disk('servicios')->exists("$servicio/$token.jpg")){
+            $lista  =   Storage::disk('servicios')->get("$servicio/$token.jpg");
+            return Image::make($lista)->response();
+        }
+    }
 }
