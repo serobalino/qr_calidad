@@ -41,13 +41,13 @@ class ArchivosController extends Controller
 
     public function guardarEnServicio(Calificacion $datos){
         $id     =   session()->getId();
-        $file = Storage::disk('temporal')->url("$id.jpg");
-        Storage::disk('servicios')->makeDirectory($datos->id_se);
-
+        if(Storage::disk('temporal')->exists("$id.jpg")){
+            $file = Storage::disk('temporal')->url("$id.jpg");
+            Storage::disk('servicios')->makeDirectory($datos->id_se);
             $full_path_source = Storage::disk('temporal')->getDriver()->getAdapter()->applyPathPrefix(basename($file));
             $full_path_dest = Storage::disk('servicios')->getDriver()->getAdapter()->applyPathPrefix($datos->id_se . '/' . basename($file));
             File::move($full_path_source, $full_path_dest);
-
-        Storage::disk('temporal')->delete("$id.jpg");
+            Storage::disk('temporal')->delete("$id.jpg");
+        }
     }
 }

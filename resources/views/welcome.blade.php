@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}" class="landing">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,9 +19,16 @@
                 </div>
             @endif
             <div class="content">
-                <div class="title m-b-md">
-                    <img src="{{asset('images/consupe_logo.svg')}}" alt="logo" style="min-width: 100%"/>
+                <div class="title m-b-md d-none d-md-block">
+                    ​<picture>
+                        <source srcset="{{asset('images/consupe_logo.svg')}}" type="image/svg+xml">
+                        <img src="{{asset('images/consupe_logo.svg')}}" class="img-fluid" alt="...">
+                    </picture>
                     {{env('APP_NAME')}}
+                </div>
+                <div class="d-block d-sm-none text-center">
+                    <img src="{{asset('images/consupe_logo.svg')}}" class="img-fluid" alt="...">
+                    <h1>{{env('APP_NAME')}}</h1>
                 </div>
                 <div class="links">
                     <a href="{{route('qa.formulario')}}">Calificación de Servicios</a>
