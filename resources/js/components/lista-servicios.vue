@@ -54,6 +54,9 @@
                                     </select>
                                     <div class="text-danger" v-show="errors.has('categoria3')">{{ errors.first('categoria3') }}</div>
                                 </div>
+                                <div class="text-center">
+                                    <a :href="vinculo" target="_blank" class="btn btn-link" v-if="editado">Ver Resultados</a>
+                                </div>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -87,6 +90,7 @@
         data:()=>({
             nuev:true,
             editado:false,
+            vinculo:null,
             columns: [
                 {
                     label: 'Código',
@@ -149,6 +153,7 @@
                 this.cat1=row.row.cat3.cat2.id_c1;
                 this.cat2=row.row.cat3.cat2.id_c2;
                 this.cat3=row.row.id_c3;
+                this.vinculo=row.row.result_se;
                 this.generarQr(row.row.codigo_se);
                 this.$validator.reset();
                 $('.bd-example-modal-lg').modal('show');

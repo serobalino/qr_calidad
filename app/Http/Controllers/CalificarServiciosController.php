@@ -74,4 +74,27 @@ class CalificarServiciosController extends Controller
     public function listar(){
         return Calificacion::all();
     }
+
+    public function resultados($token){
+        $servicio = Servicio::where('codigo_se',$token)->withCount('calificaciones')->first();
+        if($servicio){
+            $aux = ([
+                'res'   =>  Calificacion::latest()->limit(100)->get(),
+                'tot'   =>  $servicio,
+                'rea'   =>  [
+                    'r1'    => Calificacion::where('id_se',$servicio->id_se)->where('id_re',1)->count(),
+                    'r2'    => Calificacion::where('id_se',$servicio->id_se)->where('id_re',2)->count(),
+                    'r3'    => Calificacion::where('id_se',$servicio->id_se)->where('id_re',3)->count(),
+                    'r4'    => Calificacion::where('id_se',$servicio->id_se)->where('id_re',4)->count(),
+                    'r5'    => Calificacion::where('id_se',$servicio->id_se)->where('id_re',5)->count(),
+                    'r6'    => Calificacion::where('id_se',$servicio->id_se)->where('id_re',6)->count()
+                ]
+            ]);
+            return view('qa.resultados',$aux);
+        }else{
+            return abort(404);
+        }
+
+
+    }
 }

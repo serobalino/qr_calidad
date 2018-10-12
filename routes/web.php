@@ -30,6 +30,7 @@ Route::delete('/home/{codigo}','ServiciosController@eliminar');
 Route::get('/a','CalificarServiciosController@prueba');
 
 Route::prefix('📊')->group(function () {
+    Route::get('/resultados/{token}','CalificarServiciosController@resultados')->name('re.qa');
     Route::prefix('servicios')->group(function () {
         Route::get('/','CalificarServiciosController@formualrio')->name('qa.formulario');
         Route::post('/','CalificarServiciosController@buscar');

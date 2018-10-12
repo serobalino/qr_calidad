@@ -11,7 +11,7 @@ class Servicio extends Model
 
     protected $hidden           =   ['id_se'];
 
-    protected $appends          =   ['ruta_se','page_se'];
+    protected $appends          =   ['ruta_se','page_se','result_se'];
 
     public function calificaciones(){
         return $this->hasMany(Calificacion::class,'id_se','id_se');
@@ -23,6 +23,10 @@ class Servicio extends Model
 
     public function getPageSeAttribute(){
         return  route('qa.busqueda',$this->attributes['codigo_se']);
+    }
+
+    public function getResultSeAttribute(){
+        return  route('re.qa',$this->attributes['codigo_se']);
     }
 
     public function cat3(){
