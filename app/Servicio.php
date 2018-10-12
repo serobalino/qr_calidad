@@ -24,4 +24,8 @@ class Servicio extends Model
     public function getPageSeAttribute(){
         return  route('qa.busqueda',$this->attributes['codigo_se']);
     }
+
+    public function cat3(){
+        return $this->belongsTo(Categoria3::class,'id_c3','id_c3');
+    }
 }
