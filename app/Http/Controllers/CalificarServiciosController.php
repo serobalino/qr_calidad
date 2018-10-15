@@ -87,7 +87,8 @@ class CalificarServiciosController extends Controller
                     'r3'    => Calificacion::where('id_se',$servicio->id_se)->where('id_re',3)->count(),
                     'r4'    => Calificacion::where('id_se',$servicio->id_se)->where('id_re',4)->count(),
                     'r5'    => Calificacion::where('id_se',$servicio->id_se)->where('id_re',5)->count(),
-                    'r6'    => Calificacion::where('id_se',$servicio->id_se)->where('id_re',6)->count()
+                    'r6'    => Calificacion::where('id_se',$servicio->id_se)->where('id_re',6)->count(),
+                    'r7'    => Calificacion::where('id_se',$servicio->id_se)->where('id_re',7)->count()
                 ]
             ]);
             return view('qa.resultados',$aux);
