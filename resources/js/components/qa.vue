@@ -5,9 +5,11 @@
             <div class="icon-container">
               <span data-popup="Me gusta" class="gusta reaction" v-on:click="reaccion=1"></span>
             </div>
+
             <div class="icon-container">
               <span data-popup="Me encanta" class="love reaction" v-on:click="reaccion=2"></span>
             </div>
+              <!--
             <div class="icon-container">
               <span data-popup="Me enorgullece" class="thankful reaction" v-on:click="reaccion=3"></span>
             </div>
@@ -17,6 +19,7 @@
             <div class="icon-container">
               <span data-popup="Me divierte" class="wow reaction" v-on:click="reaccion=5"></span>
             </div>
+            -->
             <div class="icon-container">
               <span data-popup="Me entristece" class="sad reaction" v-on:click="reaccion=6"></span>
             </div>
@@ -24,18 +27,17 @@
               <span data-popup="Me enoja" class="angry reaction" v-on:click="reaccion=7"></span>
             </div>
           </span>
-            <span class="button"> Me gusta</span>
+            <span class="button"> Calificar</span>
         </div>
         <div class="form-group">
             <textarea class="form-control"  rows="5" placeholder="Que opinas de este servicio" v-model="comentario"></textarea>
         </div>
         <div class="d-flex">
             <div class="p-2">
-                <button type="button" class="btn btn-sm btn-primary" v-on:click="enviar">Enviar</button>
-
+                <vue-dropzone  id="fotos" :options="dropzoneOptions" v-on:vdropzone-error="errores" v-on:vdropzone-success="cargarArchivos" v-on:sending="cargarArchivos" ref="fotos" class="btn btn-success fa fa-picture-o"/>
             </div>
             <div class="p-2">
-                <vue-dropzone  id="fotos" :options="dropzoneOptions" v-on:vdropzone-error="errores" v-on:vdropzone-success="cargarArchivos" v-on:sending="cargarArchivos" ref="fotos" class="btn btn-success fa fa-picture-o"/>
+                <button type="button" class="btn btn-sm btn-primary" v-on:click="enviar">Enviar</button>
             </div>
             <div class="p-2">
                 <i class="fa fa-spinner fa-pulse fa-fw" v-if="cargando"></i>
@@ -182,11 +184,11 @@
 
                         $(".options .button").text(dataPopupNew);
 
-                        $('.options:contains(gusta)').css('color', 'rgb(88, 144, 255)');
-                        $('.options:contains(encanta)').css('color', 'rgb(242, 82, 104)');
+                        $('.options:contains(gusta)').css('color', '#00bfec');
+                        $('.options:contains(encanta)').css('color', '#00dccd');
                         $('.options:contains(enorgullece)').css('color', 'rgb(157, 135, 210)');
-                        $('.options:contains(asombra), .options:contains(divierte), .options:contains(entristece)').css('color', 'rgb(240, 186, 21)');
-                        $('.options:contains(enoja)').css('color', 'rgb(247, 113, 75)');
+                        $('.options:contains(asombra), .options:contains(divierte), .options:contains(entristece)').css('color', '#ffba60');
+                        $('.options:contains(enoja)').css('color', '#ff5f5a');
 
                         $(".options").removeClass(dataPopupOld);
                         $(".options").addClass(dataPopupNew);
@@ -234,7 +236,7 @@
                 width: 16px
                 margin-right: 4px
                 background:
-                    image: url(https://static.xx.fbcdn.net/rsrc.php/v3/y3/r/GLfzuZS5ZZ5.png)
+                    image: url(../../facebook/facebook-icons.png)
                     size: auto
                     position: 0 -892px
 
@@ -259,7 +261,7 @@
                         position: 0 -893px
 
             &.gusta
-                color: rgb(88, 144, 255)
+                color: rgb(0, 191, 236)
 
                 &::before
                     background:
@@ -325,7 +327,7 @@
                     opacity: 0
                     border-radius: 100%
                     background:
-                        image: url(https://assets.medinnna.com/facebook-reactions.gif)
+                        image: url(../../facebook/facebook-reactions.gif)
                         repeat: no-repeat
                         size: auto
 
