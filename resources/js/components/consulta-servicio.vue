@@ -2,10 +2,10 @@
     <div>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-4">Busca un servicio</h1>
-            <p class="lead">Ingresa el código</p>
+            <h1 class="display-4">Búsqueda de servicios</h1>
+            <p class="lead">Completa la siguiente información:</p>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Código" v-model="buscar" v-on:keyup.enter="enviar"/>
+                <input type="text" class="form-control" placeholder="Código o nombre del servicio" v-model="buscar" v-on:keyup.enter="enviar"/>
                 <div class="input-group-append">
                     <button class="btn btn-outline-info" type="button" v-on:click="enviar">Buscar</button>
                 </div>
