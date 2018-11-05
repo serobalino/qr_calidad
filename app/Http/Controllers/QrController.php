@@ -13,7 +13,7 @@ class QrController extends Controller
         $qr = QrCode::format('png')
             ->margin(0)
             ->size(800)
-            ->color(0, 6, 150)
+            //->color(0, 6, 150)
             ->generate(route('qa.busqueda',$token));
         return Image::make($qr)->response();
     }
