@@ -14,7 +14,7 @@
                     @auth
                         <a href="{{ url('/home') }}">Inicio</a>
                     @else
-                        <a href="{{ route('login') }}">Ingresar</a>
+
                     @endauth
                 </div>
             @endif
@@ -24,15 +24,19 @@
                         <source srcset="{{asset('images/consupe_logo.svg')}}" type="image/svg+xml">
                         <img src="{{asset('images/consupe_logo.svg')}}" class="img-fluid" alt="...">
                     </picture>
-                    {{env('APP_NAME')}}
+                    <br><br>
+                    <h3>Con el apoyo de la Dirección de Aseguramiento de la Calidad - PUCE</h3>
                 </div>
                 <div class="d-block d-sm-none text-center">
                     <img src="{{asset('images/consupe_logo.svg')}}" class="img-fluid" alt="...">
-                    <h1>{{env('APP_NAME')}}</h1>
+                    <br><br>
+                    <h3>Con el apoyo de la Dirección de Aseguramiento de la Calidad - PUCE</h3>
                 </div>
                 <div class="links">
-                    <a href="{{route('qa.formulario')}}">Calificación de Servicios</a>
+                    <a href="{{route('qa.formulario')}}">Ingresar al Calificador de Servicios</a>
                 </div>
+                <a href="https://www.facebook.com/consupepuce/" class="btn btn-link" target="_blank"><span class="fa fa-facebook-square"></span> fanpage</a>
+                <a href="https://consupe.com/contacto/" class="btn btn-link" target="_blank"><span class="fa fa-phone"></span> Contacto</a>
             </div>
         </div>
     </body>
