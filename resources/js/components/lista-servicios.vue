@@ -220,7 +220,7 @@
                                     this.cat3=null;
                                     this.cargarLista();
                                     this.generarQr();
-                                    this.errors.clear();
+                                    this.$validator.reset();
                                     //$('.bd-example-modal-lg').modal('hide');
                                     toast({
                                         type: 'success',
