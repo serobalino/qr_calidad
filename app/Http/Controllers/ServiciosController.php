@@ -41,6 +41,7 @@ class ServiciosController extends Controller
         if($sql){
             DB::beginTransaction();
             try {
+                $sql->calificaciones()->delete();
                 $sql->delete();
                 DB::commit();
                 return (['val'=>true,'mensaje'=>'Se ha eliminado exitosamente']);
