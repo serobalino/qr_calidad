@@ -9,7 +9,7 @@ class Servicio extends Model
     protected $primaryKey       =   "id_se";
     public $timestamps          =   false;
 
-    protected $hidden           =   ['id_se'];
+    //protected $hidden           =   ['id_se'];
 
     protected $appends          =   ['ruta_se','page_se','result_se'];
 
