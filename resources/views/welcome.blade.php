@@ -36,7 +36,7 @@
                     <a href="{{route('qa.formulario')}}">Ingresar al Calificador de Servicios</a>
                 </div>
                 <a href="https://www.facebook.com/consupepuce/" class="btn btn-link" target="_blank"><span class="fa fa-facebook-square"></span> fanpage</a>
-                <a href="https://consupe.com/contacto/" class="btn btn-link" target="_blank"><span class="fa fa-phone"></span> Contacto</a>
+                <a href="https://consupe.com/contacto/" class="btn btn-link" target="_blank"><span class="fa fa-file-text-o"></span> Contacto</a>
             </div>
         </div>
     </body>
