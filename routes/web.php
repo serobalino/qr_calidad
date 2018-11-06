@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::options('/home','ServiciosController@listar');
 Route::post('/home','ServiciosController@crear');
 Route::put('/home','ServiciosController@editar');
+Route::patch('/home','ServiciosController@estadisticas');
 Route::delete('/home/{codigo}','ServiciosController@eliminar');
 
 Route::get('/a','CalificarServiciosController@prueba');
