@@ -3,11 +3,10 @@
         <div class="options col-md-2 col-xs-12">
           <span class="reactions">
             <div class="icon-container">
-              <span data-popup="Me gusta" class="gusta reaction" v-on:click="reaccion=1"></span>
-            </div>
-
-            <div class="icon-container">
               <span data-popup="Me encanta" class="love reaction" v-on:click="reaccion=2"></span>
+            </div>
+            <div class="icon-container">
+              <span data-popup="Me gusta" class="gusta reaction" v-on:click="reaccion=1"></span>
             </div>
               <!--
             <div class="icon-container">
@@ -30,7 +29,7 @@
             <span class="button"> Calificar</span>
         </div>
         <div class="form-group">
-            <textarea class="form-control"  rows="5" placeholder="Que opinas de este servicio" v-model="comentario"></textarea>
+            <textarea class="form-control"  rows="5" placeholder="Comentarios o sugerencias" v-model="comentario"></textarea>
         </div>
         <div class="d-flex">
             <div class="p-2">
@@ -43,6 +42,9 @@
                 <i class="fa fa-spinner fa-pulse fa-fw" v-if="cargando"></i>
                 <img :src="this.subidas" style="max-height: 50px;margin-bottom: 15px;display:inline" class="img-fluid"/>
             </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-link" type="button" v-on:click="regresar"><i class="fa fa-undo" aria-hidden="true"></i> Buscar Servicio</button>
         </div>
     </div>
     <div v-else>
@@ -76,13 +78,16 @@
                 dictFileTooBig:"El archivo es muy grande.",
                 dictInvalidFileType:"Solo se admiten imágenes.",
                 dictResponseError:"Error al enviar el archivo.",
-                dictMaxFilesExceeded:"A superado el límite de imágenes.",
+                dictMaxFilesExceeded:"Ha superado el límite de imágenes.",
             },
         }),
         components: {
             vueDropzone: vue2Dropzone,
         },
         methods:{
+            regresar:function(){
+                location.href=location.origin+'/📊/servicios';
+            },
             errores:function(file,meesage,xhr){
                 swal({
                     text:meesage,
