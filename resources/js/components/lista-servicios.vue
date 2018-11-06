@@ -54,8 +54,32 @@
                                     </select>
                                     <div class="text-danger" v-show="errors.has('categoria3')">{{ errors.first('categoria3') }}</div>
                                 </div>
-                                <div class="text-center">
-                                    <a :href="vinculo" target="_blank" class="btn btn-link" v-if="editado">Ver Resultados</a>
+                                <div v-if="editado">
+                                    <h6>Estadísticas</h6>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <input type="date" class="form-control form-control-sm" v-model="f_inicio" v-validate="'required|date_format:YYYY-MM-DD'" placeholder="YYYY-MM-DD">
+                                        </div>
+                                        <div class="col">
+                                            <input type="date" class="form-control form-control-sm" v-model="f_fin" v-validate="'required|date_format:YYYY-MM-DD'" placeholder="YYYY-MM-DD">
+                                        </div>
+                                        <button class="btn btn-success btn-sm" v-on:click="estadisticas" type="button">Consultar</button>
+                                    </div>
+                                    <table class="table table-sm">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col" v-for="item in es">{{item.titulo}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td v-for="item in es">{{item.QAs}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="text-center">
+                                        <a :href="vinculo" target="_blank" class="btn btn-link" >Ver últimas calificaciones </a>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -118,7 +142,11 @@
             rows: [],
             descripcion:'',
             code:'',
+            aux:0,
             titulo:'',
+            f_inicio:'',
+            f_fin:'',
+            es:[],
 
             listaCat1:[],
             listaCat2:[],
@@ -145,10 +173,12 @@
                 return "<a href='"+objeto.ruta_se+"'/>"+objeto.codigo_se+"</a>";
             },
             clickear:function(row){
+                this.es=[];
                 this.nuev=false;
                 this.editado=true;
                 this.descripcion=row.row.descripcion_se;
                 this.code=row.row.codigo_se;
+                this.aux=row.row.id_se;
                 this.titulo=row.row.titulo_se;
                 this.cat1=row.row.cat3.cat2.id_c1;
                 this.cat2=row.row.cat3.cat2.id_c2;
@@ -179,6 +209,30 @@
                     this.codeQr=response.data;
                     this.code=response.data.codigo;
                 });
+            },
+            estadisticas:function(){
+                axios.patch(location.origin+location.pathname,
+                    {
+                        'codigo'    :this.aux,
+                        'inicio'    :this.f_inicio,
+                        'fin'       :this.f_fin,
+                    })
+                    .then(response=>{
+                        if(response.data.val){
+                            this.es=response.data.datos;
+                        }else{
+                            toast({
+                                type: 'error',
+                                text: response.data.mensaje
+                            });
+                        }
+                    })
+                    .catch((error) => {
+                        toast({
+                            type: 'error',
+                            text: "Vuelva a intentar"
+                        });
+                    });
             },
             cargarLista:function(){
                 axios.options(location.origin+location.pathname)
@@ -234,7 +288,10 @@
                                 }
                             })
                             .catch((error) => {
-                                toastr.error("Vuelva a intentar", "Error");
+                                toast({
+                                    type: 'error',
+                                    text: "Vuelva a intentar"
+                                });
                             });
                     } else {
                         toast({
@@ -270,7 +327,10 @@
                                 }
                             })
                             .catch((error) => {
-                                toastr.error("Vuelva a intentar", "Error");
+                                toast({
+                                    type: 'error',
+                                    text: "Vuelva a intentar"
+                                });
                             });
                     } else {
                         toast({
@@ -300,7 +360,10 @@
                                 }
                             })
                             .catch((error) => {
-                                toastr.error("Vuelva a intentar", "Error");
+                                toast({
+                                    type: 'error',
+                                    text: "Vuelva a intentar"
+                                });
                             });
                     } else {
                         toast({
