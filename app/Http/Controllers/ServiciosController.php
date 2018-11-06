@@ -23,7 +23,7 @@ class ServiciosController extends Controller
         if ($validator->fails()) {
             $mensaje="";
             foreach ($validator->errors()->all() as $item)
-                $mensaje.="$item</br>";
+                $mensaje.="$item\n";
             return (['val'=>false,'mensaje'=>$mensaje,'errores'=>$validator->errors()->all()]);
         }else{
             $servicio                   =   Servicio::where('codigo_se',$datos->codigo)->first();
@@ -65,7 +65,7 @@ class ServiciosController extends Controller
         if ($validator->fails()) {
             $mensaje="";
             foreach ($validator->errors()->all() as $item)
-                $mensaje.="$item</br>";
+                $mensaje.="$item\n";
             return (['val'=>false,'mensaje'=>$mensaje,'errores'=>$validator->errors()->all()]);
         }else{
             $servicio                   =   new Servicio();
@@ -84,5 +84,22 @@ class ServiciosController extends Controller
             'codigo'    =>  $codigo,
             'imagen'    =>  route('generar.qr',$codigo)
         ]);
+    }
+
+    public function estadisticas(Request $datos){
+        $validator = Validator::make($datos->all(), [
+            'codigo'        =>  'required|exists:servicios,id_se',
+            'inicio'        =>  'required|date',
+            'fin'           =>  'required|date|after:inicio'
+        ]);
+        if ($validator->fails()) {
+            $mensaje="";
+            foreach ($validator->errors()->all() as $item)
+                $mensaje.="$item\n";
+            return (['val'=>false,'mensaje'=>$mensaje,'errores'=>$validator->errors()->all()]);
+        }else{
+            $resultado  =   DB::select("SELECT id_re AS code,titulo_re AS titulo,(select count(*) from calificaciones where id_re=code and id_se=$datos->codigo and  creado_ca BETWEEN \"$datos->inicio\" and \"$datos->fin\") AS QAs FROM reacciones");
+            return (['val'=>true,'datos'=>$resultado,]);
+        }
     }
 }
