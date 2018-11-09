@@ -23,8 +23,14 @@
         </main>
     </div>
     <div class="container">
-        <a href="https://www.facebook.com/consupepuce/" class="btn btn-link" target="_blank"><span class="fa fa-facebook-square"></span> fanpage</a>
-        <a href="https://consupe.com/contacto/" class="btn btn-link" target="_blank"><span class="fa fa-file-text-o"></span> Contacto</a>
+        <div class="row">
+            <a href="https://www.puce.edu.ec/sitios/formularios/sugerencias/" class="btn btn-link" target="_blank"><span class="fa fa-envelope"></span> Buzón de sugerencias, inconformidades y felicitaciones PUCE</a>
+            <a href="https://www.puce.edu.ec/intranet/normativainstitucional" class="btn btn-link" target="_blank"><span class="fa fa-book"></span> Normativa PUCE</a>
+        </div>
+        <div class="row">
+            <a href="https://www.facebook.com/consupepuce/" class="btn btn-link" target="_blank"><span class="fa fa-facebook-square"></span> fanpage</a>
+            <a href="https://consupe.com/contacto/" class="btn btn-link" target="_blank"><span class="fa fa-file-text-o"></span> Contacto</a>
+        </div>
     </div>
     <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
