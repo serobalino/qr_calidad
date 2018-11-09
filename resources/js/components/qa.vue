@@ -44,12 +44,15 @@
             </div>
         </div>
         <div class="row">
-            <button class="btn btn-link" type="button" v-on:click="regresar"><i class="fa fa-undo" aria-hidden="true"></i> Buscar Servicio</button>
+            <button class="btn btn-link" type="button" v-on:click="regresar"><i class="fa fa-search" aria-hidden="true"></i> Buscar Servicio</button>
         </div>
     </div>
     <div v-else>
         <div class="alert alert-success" role="alert">
             <p class="mb-0">Gracias por ayudarnos a mejorar nuetros servicios</p>
+        </div>
+        <div class="row">
+            <button class="btn btn-link" type="button" v-on:click="regresar"><i class="fa fa-search" aria-hidden="true"></i> Buscar Servicio</button>
         </div>
     </div>
 </template>
