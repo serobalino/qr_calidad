@@ -19,24 +19,18 @@
                 </div>
             @endif
             <div class="content">
-                <div class="title m-b-md d-none d-md-block">
-                    ​<picture>
-                        <source srcset="{{asset('images/consupe_logo.svg')}}" type="image/svg+xml">
-                        <img src="{{asset('images/consupe_logo.svg')}}" class="img-fluid" alt="...">
-                    </picture>
+                <div class="text-center">
+                    <img src="{{asset('images/consupe_logo.svg')}}" class="img-fluid" style="width: 90%">
                     <br><br>
-                    <h3>Con el apoyo de la Dirección de Aseguramiento de la Calidad - PUCE</h3>
-                </div>
-                <div class="d-block d-sm-none text-center">
-                    <img src="{{asset('images/consupe_logo.svg')}}" class="img-fluid" alt="...">
-                    <br><br>
-                    <h3>Con el apoyo de la Dirección de Aseguramiento de la Calidad - PUCE</h3>
+                    <div>
+                        <h5>Con el apoyo de la Dirección de Aseguramiento de la Calidad - PUCE</h5>
+                    </div>
                 </div>
                 <div class="links">
                     <a href="{{route('qa.formulario')}}">Ingresar al Calificador de Servicios</a>
                 </div>
-                <a href="https://www.facebook.com/consupepuce/" class="btn btn-link" target="_blank"><span class="fa fa-facebook-square"></span> fanpage</a>
-                <a href="https://consupe.com/contacto/" class="btn btn-link" target="_blank"><span class="fa fa-file-text-o"></span> Contacto</a>
+                <a href="https://www.facebook.com/consupepuce/" class="btn btn-link" target="_blank" style="color: black"><span class="fa fa-facebook-square"></span> fanpage</a>
+                <a href="https://consupe.com/contacto/" class="btn btn-link" target="_blank" style="color: black"><span class="fa fa-file-text-o"></span> Contacto</a>
             </div>
         </div>
     </body>

@@ -13,8 +13,8 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
-                    <span class="text-muted d-none d-md-block">Con el apoyo de la Dirección de Aseguramiento de la Calidad - PUCE</span>
                 </a>
+                <span class="text-muted text-left">Con el apoyo de la Dirección de Aseguramiento de la Calidad - PUCE</span>
             </div>
         </nav>
 
@@ -24,7 +24,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <a href="https://www.puce.edu.ec/sitios/formularios/sugerencias/" class="btn btn-link" target="_blank"><span class="fa fa-envelope"></span> Buzón de sugerencias, inconformidades y felicitaciones PUCE</a>
+            <a href="https://www.puce.edu.ec/sitios/formularios/sugerencias/" class="btn btn-link" target="_blank"><span class="fa fa-envelope"></span> Ir al Buzón de sugerencias PUCE</a>
             <a href="https://www.puce.edu.ec/intranet/normativainstitucional" class="btn btn-link" target="_blank"><span class="fa fa-book"></span> Normativa PUCE</a>
         </div>
         <div class="row">
