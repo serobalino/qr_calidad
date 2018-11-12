@@ -16,6 +16,10 @@ class CalificarServiciosController extends Controller
         return view('qa.busqueda');
     }
 
+    public function todos(){
+        return Servicio::orderBy('titulo_se')->get();
+    }
+
     public function buscar(Request $datos){
         return Servicio::where('codigo_se',$datos->q)->orWhere('titulo_se','like',"%$datos->q%")->get();
     }
