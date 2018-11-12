@@ -53,8 +53,17 @@
                         text: 'Ingrese un código válido'
                     });
                 }
+            },
+            consulta:function(){
+                axios.options(location.origin+location.pathname)
+                    .then(response=>{
+                        this.lista=response.data;
+                    });
             }
         },
+        mounted(){
+            this.consulta();
+        }
     }
 </script>
 
