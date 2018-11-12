@@ -35,6 +35,7 @@ Route::prefix('📊')->group(function () {
     Route::prefix('servicios')->group(function () {
         Route::get('/','CalificarServiciosController@formualrio')->name('qa.formulario');
         Route::post('/','CalificarServiciosController@buscar');
+        Route::options('/','CalificarServiciosController@todos');
 
         Route::get('/{token}','CalificarServiciosController@busqueda')->name('qa.busqueda');
         Route::put('/{token}','CalificarServiciosController@guardar');
