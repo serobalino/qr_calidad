@@ -83,7 +83,7 @@ class CalificarServiciosController extends Controller
         $servicio = Servicio::where('codigo_se',$token)->withCount('calificaciones')->first();
         if($servicio){
             $aux = ([
-                'res'   =>  Calificacion::latest()->limit(100)->get(),
+                'res'   =>  Calificacion::where('id_se',$servicio->id_se)->latest()->limit(100)->get(),
                 'tot'   =>  $servicio,
                 'rea'   =>  [
                     'r1'    => Calificacion::where('id_se',$servicio->id_se)->where('id_re',1)->count(),
