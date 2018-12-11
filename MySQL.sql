@@ -3,7 +3,6 @@
 /* Created on:     09/10/2018 15:42:21                          */
 /*==============================================================*/
 
-
 drop table if exists calificaciones;
 
 drop table if exists categoria_1;
@@ -131,4 +130,3 @@ alter table categoria_3 add constraint fk_cat2_cat3 foreign key (id_c2)
 
 alter table servicios add constraint fk_caategoria_servicios foreign key (id_c3)
       references categoria_3 (id_c3) on delete restrict on update restrict;
-
